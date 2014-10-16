@@ -1,0 +1,25 @@
+﻿@using Nancy.ImageCut
+@using Nancy.Extensions
+@inherits NancyRazorViewBase<dynamic>
+@{
+    Layout = "Shared/_Layout.cshtml";      // Use slash instead of backslash
+    ViewBag.Title = "Title";
+    // Don't begin with slash @Html.Partial("SmallPartial")
+    PictureCutWrapper pictureCut = ViewBag.pictureCut;
+}
+
+<div class="row">
+    <div class="col-lg-8">
+        <p>Click on image below to upload new image or just drop file on it.</p>
+        @pictureCut.RenderContainer()
+    </div>
+</div>
+ 
+ 
+<script src="~/Content/jquery-ui.min.js"></script>
+
+@pictureCut.RenderJsLinks(Html.RenderContext.Context)
+@pictureCut.RenderJsCode()
+
+
+

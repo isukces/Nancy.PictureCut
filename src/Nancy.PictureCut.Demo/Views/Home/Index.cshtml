@@ -1,0 +1,18 @@
+﻿@using Nancy.PictureCut.Demo.Code
+@inherits NancyRazorViewBase<dynamic>
+@{
+    Layout = "Shared/_Layout.cshtml";      // Use slash instead of backslash
+    ViewBag.Title = "Title";
+    // Don't begin with slash @Html.Partial("SmallPartial")
+    string demo = "http://somedomain.com";
+}
+
+<h2>PictureCut wrapper for NancyFx</h2>
+<p>
+    <code>Nancy.PictureCut</code> is just port of <a href="http://picturecut.tuyoshi.com.br/">Picture Cut</a> - <i>&quot;jquery plugin that handles images in a very friendly and simple way&quot;</i>.
+    This package is originally designed for PHP based host.
+    <code>Nancy.PictureCut</code> allows to use almost the same functionality in Nancy based application.
+</p>
+
+<p><a href="~/Demo">Demo</a> page presents basic features of package.</p>
+
