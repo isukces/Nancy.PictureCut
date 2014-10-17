@@ -1,0 +1,17 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>Nancy.PictureCut</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <projectUrl>https://github.com/isukces/Nancy.PictureCut</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>PictureCut Wrapper for NancyFX framework</description>
+    <tags>Nancy, PictureCut, jQuery, MVC</tags>
+  </metadata>
+   <files>
+    <file src="bin\Release\Nancy.PictureCut.pdb" target="lib\net40" />
+  </files>
+</package>
