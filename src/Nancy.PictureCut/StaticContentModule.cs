@@ -66,9 +66,14 @@ namespace Nancy.PictureCut
             return lastModified <= ifModifiedSince.Value;
         }
 
-        private Stream EmbeddedResourceStream(string streamName)
+        private static Stream EmbeddedResourceStream(string streamName)
         {
-            return GetType().Assembly.GetManifestResourceStream("Nancy.ImageCut." + streamName.Replace("/", "."));
+            var type = typeof(StaticContentModule);
+            var resourceName = string.Format("{0}.{1}", type.Namespace, streamName.Replace("/", "."));
+            var resourceStream = type.Assembly.GetManifestResourceStream(resourceName);
+            if (resourceStream == null)
+                throw new Exception("Unable to find resource " + resourceName);
+            return resourceStream;
         }
 
         private object FromStream(string streamName, string contentType)
@@ -132,21 +137,29 @@ namespace Nancy.PictureCut
 
         private object GetMainJavascript()
         {
-            using (var stream = EmbeddedResourceStream("Js.jquery.picture.cut.js"))
+            try
             {
-                using (var reader = new StreamReader(stream))
+                using (var stream = EmbeddedResourceStream("Js.jquery.picture.cut.js"))
                 {
-                    var result = reader.ReadToEnd();
-                    var dict = new Dictionary<string, string>
+                    using (var reader = new StreamReader(stream))
                     {
-                        {"src/windows/window.bootstrap.htm",   WindowBootstrap},
-                        {"src/img/icon_add_image2.png",   "icon_add_image2.png"},
-                        {"src/windows/core/window.pc.js", "window.pc.js"},
-                        {"src/windows/JanelaBootstrap/jquery-ui-1.10.0.custom.css","jquery-ui-1.10.0.custom.css"}
-                    };
-                    result = dict.Aggregate(result, (current, pair) => current.Replace(pair.Key, BaseUrl.Substring(1) + pair.Value));
-                    return Response.AsText(result, MimeJavascript);
+                        var result = reader.ReadToEnd();
+                        var dict = new Dictionary<string, string>
+                        {
+                            {"src/windows/window.bootstrap.htm", WindowBootstrap},
+                            {"src/img/icon_add_image2.png", "icon_add_image2.png"},
+                            {"src/windows/core/window.pc.js", "window.pc.js"},
+                            {"src/windows/JanelaBootstrap/jquery-ui-1.10.0.custom.css", "jquery-ui-1.10.0.custom.css"}
+                        };
+                        result = dict.Aggregate(result,
+                            (current, pair) => current.Replace(pair.Key, BaseUrl.Substring(1) + pair.Value));
+                        return Response.AsText(result, MimeJavascript);
+                    }
                 }
+            }
+            catch (Exception e)
+            {
+                return new Responses.TextResponse(HttpStatusCode.InternalServerError, string.Format("Main JS exception\r\n{0}\r\n{1}", e.Message, e.StackTrace));
             }
         }
 
