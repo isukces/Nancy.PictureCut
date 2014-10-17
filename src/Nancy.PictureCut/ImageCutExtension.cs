@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Nancy.ImageCut
+namespace Nancy.PictureCut
 {
     public static class ImageCutExtension
     {
@@ -18,13 +18,6 @@ namespace Nancy.ImageCut
                 return ((bool)x).ToString().ToLower();
             throw new NotImplementedException(string.Format("Unable to serialize {0} to javascript", x.GetType().ToString()));
         }
-
-        /*
-        public static IHtmlString RenderImageCut<TModel>(this HtmlHelpers<TModel> x, string viewBagKey, bool withScriptTagBound = true)
-        {
-            ImageCutWrapper wrapper = x.RenderContext.Context.ViewBag[viewBagKey];
-            return wrapper.Render(withScriptTagBound);
-        }
-         */
+ 
     }
 }

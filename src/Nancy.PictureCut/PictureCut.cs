@@ -6,7 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 
-namespace Nancy.ImageCut
+namespace Nancy.PictureCut
 {
     public class PictureCut
     {

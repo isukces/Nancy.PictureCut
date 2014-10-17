@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace Nancy.ImageCut
+namespace Nancy.PictureCut
 {
     public interface IImageCutStorage
     {

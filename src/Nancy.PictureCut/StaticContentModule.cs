@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace Nancy.ImageCut
+namespace Nancy.PictureCut
 {
     // ReSharper disable once UnusedMember.Global
     public class StaticContentModule : NancyModule

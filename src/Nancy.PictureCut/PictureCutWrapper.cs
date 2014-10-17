@@ -7,7 +7,7 @@ using System.Text;
 using Nancy.Extensions;
 using Nancy.ViewEngines.Razor;
 
-namespace Nancy.ImageCut
+namespace Nancy.PictureCut
 {
     public class PictureCutWrapper
     {
@@ -53,7 +53,7 @@ namespace Nancy.ImageCut
 
         public void Init()
         {
-            Func<string, string> processPath = (path) => ("/" + (path ?? "").TrimStart('~', '/')).TrimEnd('/') + "/";
+            Func<string, string> processPath = path => ("/" + (path ?? "").TrimStart('~', '/')).TrimEnd('/') + "/";
             // this method is called in module's constructor so _context is null and we cannod use 
             // _context.ToFullPath
             var modulePath = processPath(_module.ModulePath);
@@ -73,7 +73,7 @@ namespace Nancy.ImageCut
                             "ActionToUploadProperty value must start from module.ModulePath, currently: '{0}'",
                             _module.ModulePath));
                 // Post["/Photo/Upload/"] = _PostPhotoUpload;
-                _module.Post[path] = (_) => ProcessPost();
+                _module.Post[path] = _ => ProcessPost();
             }
 
             #endregion
@@ -95,7 +95,7 @@ namespace Nancy.ImageCut
                             "ActionToUploadProperty value must start from module.ModulePath, currently: '{0}'",
                             _module.ModulePath));
                 // Post["/Photo/Upload/"] = _PostPhotoUpload;
-                _module.Get[folderOnServer] = (_) => ProcessGetImage(_.id);
+                _module.Get[folderOnServer] = _ => ProcessGetImage(_.id);
             }
 
             #endregion
@@ -117,13 +117,13 @@ namespace Nancy.ImageCut
 
         public IHtmlString RenderJsCode()
         {
-            const bool withScriptTagBound = true;
+            // const bool withScriptTagBound = true;
             var context = _module.Context;
             if (context == null)
                 throw new Exception("Unable to RenderJs because module.Context is null ");
             var sb = new StringBuilder();
-            if (withScriptTagBound)
-                sb.AppendLine("<script type=\"text/javascript\">");
+            //if (withScriptTagBound)
+            sb.AppendLine("<script type=\"text/javascript\">");
             sb.AppendFormat("$({0}).PictureCut({{\r\n", ("#" + ContainerId).JsSerialize());
             {
                 var dir = new Dictionary<string, object>();
@@ -162,8 +162,8 @@ namespace Nancy.ImageCut
                 sb.AppendLine("    " + string.Join(",\r\n", x));
             }
             sb.AppendLine("});");
-            if (withScriptTagBound)
-                sb.AppendLine("</script>");
+            // if (withScriptTagBound)
+            sb.AppendLine("</script>");
 
 
             return new NonEncodedHtmlString(sb.ToString());

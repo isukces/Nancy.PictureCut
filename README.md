@@ -8,7 +8,7 @@ Nancy.PictureCut
 
 `Nancy.PictureCut` is just port of Picture Cut - "jquery plugin that handles images in a very friendly and simple way". 
 This package is originally designed for PHP based host. 
-`Nancy.PictureCut` allows to use almost the same functionality in Nancy based application, and helps with boring steps
+`Nancy.PictureCut` allows to use almost the same functionality in Nancy based application and helps with boring steps
 
 * contains all PictureCut files like javascript, images, templates and styles,
 * provides module that make this files available by http requests,

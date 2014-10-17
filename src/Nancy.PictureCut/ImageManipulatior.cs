@@ -4,7 +4,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 
-namespace Nancy.ImageCut
+namespace Nancy.PictureCut
 {
     public sealed class ImageManipulatior : IDisposable
     {

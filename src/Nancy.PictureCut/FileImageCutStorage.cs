@@ -1,16 +1,27 @@
 ﻿using System.IO;
 
-namespace Nancy.ImageCut
+namespace Nancy.PictureCut
 {
     public class FileImageCutStorage : IImageCutStorage
     {
-        private readonly string _directoryName;
-        private readonly bool _ignoreSavedFileDirectories;
+        #region Constructors
 
         public FileImageCutStorage(string directoryName, bool ignoreSavedFileDirectories)
         {
             _directoryName = directoryName;
             _ignoreSavedFileDirectories = ignoreSavedFileDirectories;
+        }
+
+        #endregion Constructors
+
+        #region Methods
+
+        // Public Methods 
+
+        public Stream GetSavedImageStream(string name)
+        {
+            var fi = PrepareFileInfo(name);
+            return new FileStream(fi.FullName, FileMode.Open);
         }
 
         public void SaveImage(string name, Stream stream)
@@ -23,6 +34,7 @@ namespace Nancy.ImageCut
                 stream.CopyTo(fs);
             }
         }
+        // Private Methods 
 
         private FileInfo PrepareFileInfo(string name)
         {
@@ -36,10 +48,13 @@ namespace Nancy.ImageCut
             return fi;
         }
 
-        public Stream GetSavedImageStream(string name)
-        {
-            var fi = PrepareFileInfo(name);
-            return new FileStream(fi.FullName, FileMode.Open);
-        }
+        #endregion Methods
+
+        #region Fields
+
+        private readonly string _directoryName;
+        private readonly bool _ignoreSavedFileDirectories;
+
+        #endregion Fields
     }
 }

@@ -1,17 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Nancy.ImageCut
+﻿namespace Nancy.PictureCut
 {
     public class EncodedText
     {
+		#region Constructors 
+
         public EncodedText(string text)
         {
             Text = text;
         }
 
+		#endregion Constructors 
+
+		#region Properties 
+
         public string Text { get; private set; }
+
+		#endregion Properties 
     }
 }
