@@ -1,6 +1,7 @@
 ﻿using Nancy.Bootstrapper;
 using Nancy.Conventions;
 using Nancy.Security;
+using Nancy.Session;
 using Nancy.TinyIoc;
 
 namespace Nancy.PictureCut.Demo.Code
@@ -15,6 +16,8 @@ namespace Nancy.PictureCut.Demo.Code
         protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines)
         {
             base.ApplicationStartup(container, pipelines);
+            StaticConfiguration.DisableErrorTraces = false;
+            CookieBasedSessions.Enable(pipelines);
             Csrf.Enable(pipelines);
         }
 

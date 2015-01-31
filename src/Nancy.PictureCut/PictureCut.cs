@@ -16,8 +16,8 @@ namespace Nancy.PictureCut
         {
             R1 = new Dictionary<string, string[]>
                 {
-                    {"request"               , new []{"required"}},
 			        {"inputOfFile"           , new []{"required"}},
+                    {"request"               , new []{"required"}},
 			        {"enableResize"          , new []{"bool"}},
 			        {"minimumWidthToResize"  , new []{"int"}},
 			        {"minimumHeightToResize" , new []{"int"}},
